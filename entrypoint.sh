@@ -21,6 +21,7 @@ then
 fi
 
 CLONE_DIR=$(mktemp -d)
+KEEP_FILES=$(mktemp -d)
 
 echo "Cloning destination git repository"
 git config --global user.email "$INPUT_USER_EMAIL"
@@ -32,6 +33,11 @@ then
   git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE"
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
+
+cp -r "$CLONE_DIR/CNAME" "$KEEP_FILES/"
+cp -r "$CLONE_DIR/README.md" "$KEEP_FILES/"
+mkdir -p "$KEEP_FILES/assets/img/"
+cp -r "$CLONE_DIR/assets/img/phdImage.jpeg" "$KEEP_FILES/assets/img/"
 
 echo "Copying contents to git repo"
 # shellcheck disable=SC2115
@@ -46,6 +52,7 @@ else
 fi
 
 cd "$CLONE_DIR"
+cp -r "$KEEP_FILES/." "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 
 echo "Adding git commit"
 git add .
