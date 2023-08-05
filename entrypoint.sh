@@ -37,7 +37,6 @@ fi
 cp -r "$CLONE_DIR/CNAME" "$KEEP_FILES/"
 cp -r "$CLONE_DIR/README.md" "$KEEP_FILES/"
 mkdir -p "$KEEP_FILES/assets/img/"
-cp -r "$CLONE_DIR/assets/img/phdImage.jpeg" "$KEEP_FILES/assets/img/"
 
 echo "Copying contents to git repo"
 # shellcheck disable=SC2115
